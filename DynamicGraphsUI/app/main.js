@@ -8,20 +8,23 @@
             kendoConsole.log(kendo.format("event :: seriesHover ({0} : {1})", e.series.name, e.value));
         };
 
-        $scope.electricity = new kendo.data.DataSource({
-            transport: {
-                read: {
-                    url: "../Content/test.json",
-                    dataType: "json"
+        $http({
+            method: 'GET',
+            url: '/api/Graph'
+        }).then(function successCallback(response) {
+            $scope.electricity = new kendo.data.DataSource({
+                data: JSON.parse(response.data),
+                sort: {
+                    field: "year",
+                    dir: "asc"
                 }
-            },
-            sort: {
-                field: "year",
-                dir: "asc"
-            }
+            });
+        }, function errorCallback(response) {
+            console.log("error", response);
         });
-        //define scope variable here.
 
     });
 
 })();
+
+
