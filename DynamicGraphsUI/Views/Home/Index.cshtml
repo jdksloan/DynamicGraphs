@@ -1,0 +1,31 @@
+﻿<div class="jumbotron">
+    <h1>Dynamic Graphs</h1>
+    <p class="lead">Jethro Sloan Dynm</p>
+    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+<div class="row">
+    <div class="col-md-4">
+
+        <div kendo-chart
+             k-legend="{ position: 'bottom' }"
+             k-series-defaults="{ type: 'bar' }"
+             k-series="[
+                                { field: 'nuclear', name: 'Nuclear electricity' },
+                                { field: 'hydro', name: 'Hydro electricity' },
+                                { field: 'wind', name: 'Wind electricity' }
+                            ]"
+             k-data-source="electricity"
+             k-series-hover="onSeriesHover"
+             style="height: 400px;"></div>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+    </div>
+</div>
