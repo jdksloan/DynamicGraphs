@@ -1,5 +1,5 @@
 ﻿body {
-    background-color:#3d3d3d;
+    background-color:#252830;
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -26,3 +26,22 @@ hr{
     color: #FF8C00;
 }
 
+.bg-blue{
+    background-color: #1997c6;
+}
+
+.bd-blue{
+    border-color: #1997c6;
+}
+
+.bg-red{
+    background-color: #fb564d;
+}
+
+.bd-red{
+    border-color: #fb564d;
+}
+
+.txt-silver{
+    color: #DDDDDD;
+}

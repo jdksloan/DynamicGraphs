@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5a564912dfb1471e8759966840d6f020" Name="Diagram1">
+        <EntityTypeShape EntityType="Test_ScenarioModel.HISTORY" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Test_ScenarioModel.HISTORY_RATES" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Test_ScenarioModel.INCOME" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Test_ScenarioModel.MASTER" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Test_ScenarioModel.MORTGAGE" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Test_ScenarioModel.RATE" Width="1.5" PointX="3" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Test_ScenarioModel.SECURITIZATION" Width="1.5" PointX="3" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Test_ScenarioModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Test_ScenarioModel.VALUATION" Width="1.5" PointX="3" PointY="16.875" IsExpanded="true" />
+        <AssociationConnector Association="Test_ScenarioModel.FK_HISTORY_RATES_RATES" ManuallyRouted="false" />
+        <AssociationConnector Association="Test_ScenarioModel.FK_INCOME_MASTER" ManuallyRouted="false" />
+        <AssociationConnector Association="Test_ScenarioModel.FK_MORTGAGE_MASTER" ManuallyRouted="false" />
+        <AssociationConnector Association="Test_ScenarioModel.FK_RATES_MASTER" ManuallyRouted="false" />
+        <AssociationConnector Association="Test_ScenarioModel.FK_SECURITIZATION_MASTER" ManuallyRouted="false" />
+        <AssociationConnector Association="Test_ScenarioModel.FK_VALUATION_MASTER" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

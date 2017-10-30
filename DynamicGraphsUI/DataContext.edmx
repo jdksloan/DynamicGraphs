@@ -1,0 +1,692 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Test_ScenarioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="HISTORY">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+            <PropertyRef Name="ReportDate" />
+          </Key>
+          <Property Name="M_PoolID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_LoanID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ReportDate" Type="date" Nullable="false" />
+          <Property Name="CurrentPrincipalBalance" Type="float" />
+          <Property Name="CurrentLTV" Type="float" />
+          <Property Name="LoanAge" Type="float" />
+          <Property Name="CurrentPropertyVal" Type="varchar(max)" />
+          <Property Name="Savings" Type="float" />
+          <Property Name="CurrentIndexedLTV" Type="float" />
+          <Property Name="DelinquencyStatus" Type="float" />
+          <Property Name="BorrowerExposure" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="NoBorrowers" Type="int" />
+        </EntityType>
+        <EntityType Name="HISTORY_RATES">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+            <PropertyRef Name="ReportDate" />
+            <PropertyRef Name="CurrentRateType" />
+          </Key>
+          <Property Name="M_PoolID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_LoanID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ReportDate" Type="date" Nullable="false" />
+          <Property Name="CurrentRateType" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CurrentInterestRate" Type="float" />
+          <Property Name="CurrentDTI" Type="float" />
+          <Property Name="CurrentLTFV" Type="float" />
+        </EntityType>
+        <EntityType Name="INCOME">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_LoanID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="DTI" Type="float" />
+          <Property Name="LTI" Type="float" />
+          <Property Name="SelfCertification" Type="varchar" MaxLength="45" />
+          <Property Name="EmploymentStatus" Type="varchar" MaxLength="45" />
+          <Property Name="TotalIncome" Type="float" />
+          <Property Name="BorrowerBirthDate" Type="date" />
+          <Property Name="IndexedDTI" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="IndexedLTI" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="IndexedTotalIncome" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="MaxBorrowerIncome" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="BorrowerTotalIncome" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="LivingExpenses" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="CurrentInterestShock" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="MonthlyNetIncome" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="MonthlyMortgageInterest" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="MonthlyMortgagePrincipal" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="MonthlyIncomeBuffer" Type="decimal" Precision="15" Scale="2" />
+        </EntityType>
+        <EntityType Name="MASTER">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_LoanID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_BorrowerID" Type="varchar" MaxLength="45" />
+          <Property Name="ClassType" Type="varchar" MaxLength="45" />
+          <Property Name="OriginalPrincipalBalance" Type="float" />
+          <Property Name="LoanOriginationDate" Type="date" />
+          <Property Name="MaturityDate" Type="date" />
+          <Property Name="TermToMaturity" Type="float" />
+          <Property Name="Guarantee" Type="float" />
+          <Property Name="LoanTypeIndicator" Type="int" />
+          <Property Name="Sector" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="MORTGAGE">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_LoanID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="BTLStatus" Type="varchar" MaxLength="45" />
+          <Property Name="RepaymentType" Type="varchar" MaxLength="45" />
+          <Property Name="SecondLien" Type="varchar" MaxLength="45" />
+        </EntityType>
+        <EntityType Name="RATES">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_LoanID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="ReversionaryDate" Type="date" />
+          <Property Name="InterestStartDate" Type="varchar" MaxLength="10" />
+          <Property Name="RemainingFixedRateTerm" Type="float" />
+          <Property Name="PrincipalStartDate" Type="date" />
+          <Property Name="OriginalFixedRateTerm" Type="float" />
+        </EntityType>
+        <EntityType Name="SECURITIZATION">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_LoanID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="LifetimeBasePD" Type="float" />
+          <Property Name="LifetimeBasePDOverride" Type="float" />
+          <Property Name="Multiple_NEW" Type="float" />
+          <Property Name="LifetimeBasePPOverride" Type="float" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="VALUATION">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="M_LoanID" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="OriginalPropertyValue" Type="varchar(max)" />
+          <Property Name="PropertyValuationDate" Type="date" />
+          <Property Name="OriginalLTV" Type="float" />
+          <Property Name="OriginalLTFV" Type="float" />
+          <Property Name="OriginalForeclosureValue" Type="float" />
+          <Property Name="IndexedLTFV" Type="float" />
+          <Property Name="CurrentForeclosureValue" Type="float" />
+          <Property Name="CurrentPropertyValue" Type="float" />
+          <Property Name="CurrentNetPropertyValue" Type="float" />
+          <Property Name="ForeclosureResidualDebtEstimate" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="LoanLossEstimate" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="LoanPrice" Type="float" />
+        </EntityType>
+        <Association Name="FK_HISTORY_RATES_RATES">
+          <End Role="RATES" Type="Self.RATES" Multiplicity="1" />
+          <End Role="HISTORY_RATES" Type="Self.HISTORY_RATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RATES">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="HISTORY_RATES">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INCOME_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="INCOME" Type="Self.INCOME" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="INCOME">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MORTGAGE_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="MORTGAGE" Type="Self.MORTGAGE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="MORTGAGE">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RATES_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="RATES" Type="Self.RATES" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="RATES">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECURITIZATION_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="SECURITIZATION" Type="Self.SECURITIZATION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="SECURITIZATION">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VALUATION_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="VALUATION" Type="Self.VALUATION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="VALUATION">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Get_CPB_Vs_OPB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Test_ScenarioModelStoreContainer">
+          <EntitySet Name="HISTORY" EntityType="Self.HISTORY" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORY_RATES" EntityType="Self.HISTORY_RATES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INCOME" EntityType="Self.INCOME" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MASTER" EntityType="Self.MASTER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MORTGAGE" EntityType="Self.MORTGAGE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RATES" EntityType="Self.RATES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SECURITIZATION" EntityType="Self.SECURITIZATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VALUATION" EntityType="Self.VALUATION" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_HISTORY_RATES_RATES" Association="Self.FK_HISTORY_RATES_RATES">
+            <End Role="RATES" EntitySet="RATES" />
+            <End Role="HISTORY_RATES" EntitySet="HISTORY_RATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INCOME_MASTER" Association="Self.FK_INCOME_MASTER">
+            <End Role="MASTER" EntitySet="MASTER" />
+            <End Role="INCOME" EntitySet="INCOME" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MORTGAGE_MASTER" Association="Self.FK_MORTGAGE_MASTER">
+            <End Role="MASTER" EntitySet="MASTER" />
+            <End Role="MORTGAGE" EntitySet="MORTGAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RATES_MASTER" Association="Self.FK_RATES_MASTER">
+            <End Role="MASTER" EntitySet="MASTER" />
+            <End Role="RATES" EntitySet="RATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SECURITIZATION_MASTER" Association="Self.FK_SECURITIZATION_MASTER">
+            <End Role="MASTER" EntitySet="MASTER" />
+            <End Role="SECURITIZATION" EntitySet="SECURITIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VALUATION_MASTER" Association="Self.FK_VALUATION_MASTER">
+            <End Role="MASTER" EntitySet="MASTER" />
+            <End Role="VALUATION" EntitySet="VALUATION" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Test_ScenarioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="HISTORY">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+            <PropertyRef Name="ReportDate" />
+          </Key>
+          <Property Name="M_PoolID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_LoanID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReportDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CurrentPrincipalBalance" Type="Double" />
+          <Property Name="CurrentLTV" Type="Double" />
+          <Property Name="LoanAge" Type="Double" />
+          <Property Name="CurrentPropertyVal" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Savings" Type="Double" />
+          <Property Name="CurrentIndexedLTV" Type="Double" />
+          <Property Name="DelinquencyStatus" Type="Double" />
+          <Property Name="BorrowerExposure" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="NoBorrowers" Type="Int32" />
+        </EntityType>
+        <EntityType Name="HISTORY_RATES">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+            <PropertyRef Name="ReportDate" />
+            <PropertyRef Name="CurrentRateType" />
+          </Key>
+          <Property Name="M_PoolID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_LoanID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReportDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CurrentRateType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CurrentInterestRate" Type="Double" />
+          <Property Name="CurrentDTI" Type="Double" />
+          <Property Name="CurrentLTFV" Type="Double" />
+          <NavigationProperty Name="RATE" Relationship="Self.FK_HISTORY_RATES_RATES" FromRole="HISTORY_RATES" ToRole="RATES" />
+        </EntityType>
+        <EntityType Name="INCOME">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_LoanID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DTI" Type="Double" />
+          <Property Name="LTI" Type="Double" />
+          <Property Name="SelfCertification" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="EmploymentStatus" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="TotalIncome" Type="Double" />
+          <Property Name="BorrowerBirthDate" Type="DateTime" Precision="0" />
+          <Property Name="IndexedDTI" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="IndexedLTI" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="IndexedTotalIncome" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MaxBorrowerIncome" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="BorrowerTotalIncome" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="LivingExpenses" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="CurrentInterestShock" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MonthlyNetIncome" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MonthlyMortgageInterest" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MonthlyMortgagePrincipal" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="MonthlyIncomeBuffer" Type="Decimal" Precision="15" Scale="2" />
+          <NavigationProperty Name="MASTER" Relationship="Self.FK_INCOME_MASTER" FromRole="INCOME" ToRole="MASTER" />
+        </EntityType>
+        <EntityType Name="MASTER">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_LoanID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_BorrowerID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="ClassType" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="OriginalPrincipalBalance" Type="Double" />
+          <Property Name="LoanOriginationDate" Type="DateTime" Precision="0" />
+          <Property Name="MaturityDate" Type="DateTime" Precision="0" />
+          <Property Name="TermToMaturity" Type="Double" />
+          <Property Name="Guarantee" Type="Double" />
+          <Property Name="LoanTypeIndicator" Type="Int32" />
+          <Property Name="Sector" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="INCOME" Relationship="Self.FK_INCOME_MASTER" FromRole="MASTER" ToRole="INCOME" />
+          <NavigationProperty Name="MORTGAGE" Relationship="Self.FK_MORTGAGE_MASTER" FromRole="MASTER" ToRole="MORTGAGE" />
+          <NavigationProperty Name="RATE" Relationship="Self.FK_RATES_MASTER" FromRole="MASTER" ToRole="RATES" />
+          <NavigationProperty Name="SECURITIZATION" Relationship="Self.FK_SECURITIZATION_MASTER" FromRole="MASTER" ToRole="SECURITIZATION" />
+          <NavigationProperty Name="VALUATION" Relationship="Self.FK_VALUATION_MASTER" FromRole="MASTER" ToRole="VALUATION" />
+        </EntityType>
+        <EntityType Name="MORTGAGE">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_LoanID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BTLStatus" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="RepaymentType" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="SecondLien" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MASTER" Relationship="Self.FK_MORTGAGE_MASTER" FromRole="MORTGAGE" ToRole="MASTER" />
+        </EntityType>
+        <EntityType Name="RATE">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_LoanID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReversionaryDate" Type="DateTime" Precision="0" />
+          <Property Name="InterestStartDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="RemainingFixedRateTerm" Type="Double" />
+          <Property Name="PrincipalStartDate" Type="DateTime" Precision="0" />
+          <Property Name="OriginalFixedRateTerm" Type="Double" />
+          <NavigationProperty Name="HISTORY_RATES" Relationship="Self.FK_HISTORY_RATES_RATES" FromRole="RATES" ToRole="HISTORY_RATES" />
+          <NavigationProperty Name="MASTER" Relationship="Self.FK_RATES_MASTER" FromRole="RATES" ToRole="MASTER" />
+        </EntityType>
+        <EntityType Name="SECURITIZATION">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_LoanID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LifetimeBasePD" Type="Double" />
+          <Property Name="LifetimeBasePDOverride" Type="Double" />
+          <Property Name="Multiple_NEW" Type="Double" />
+          <Property Name="LifetimeBasePPOverride" Type="Double" />
+          <NavigationProperty Name="MASTER" Relationship="Self.FK_SECURITIZATION_MASTER" FromRole="SECURITIZATION" ToRole="MASTER" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="VALUATION">
+          <Key>
+            <PropertyRef Name="M_LoanID" />
+          </Key>
+          <Property Name="M_PoolID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="M_LoanID" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OriginalPropertyValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PropertyValuationDate" Type="DateTime" Precision="0" />
+          <Property Name="OriginalLTV" Type="Double" />
+          <Property Name="OriginalLTFV" Type="Double" />
+          <Property Name="OriginalForeclosureValue" Type="Double" />
+          <Property Name="IndexedLTFV" Type="Double" />
+          <Property Name="CurrentForeclosureValue" Type="Double" />
+          <Property Name="CurrentPropertyValue" Type="Double" />
+          <Property Name="CurrentNetPropertyValue" Type="Double" />
+          <Property Name="ForeclosureResidualDebtEstimate" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="LoanLossEstimate" Type="Decimal" Precision="15" Scale="2" />
+          <Property Name="LoanPrice" Type="Double" />
+          <NavigationProperty Name="MASTER" Relationship="Self.FK_VALUATION_MASTER" FromRole="VALUATION" ToRole="MASTER" />
+        </EntityType>
+        <Association Name="FK_HISTORY_RATES_RATES">
+          <End Role="RATES" Type="Self.RATE" Multiplicity="1" />
+          <End Role="HISTORY_RATES" Type="Self.HISTORY_RATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RATES">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="HISTORY_RATES">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INCOME_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="INCOME" Type="Self.INCOME" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="INCOME">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MORTGAGE_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="MORTGAGE" Type="Self.MORTGAGE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="MORTGAGE">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RATES_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="RATES" Type="Self.RATE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="RATES">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SECURITIZATION_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="SECURITIZATION" Type="Self.SECURITIZATION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="SECURITIZATION">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VALUATION_MASTER">
+          <End Role="MASTER" Type="Self.MASTER" Multiplicity="1" />
+          <End Role="VALUATION" Type="Self.VALUATION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="MASTER">
+              <PropertyRef Name="M_LoanID" />
+            </Principal>
+            <Dependent Role="VALUATION">
+              <PropertyRef Name="M_LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Test_ScenarioEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="HISTORies" EntityType="Self.HISTORY" />
+          <EntitySet Name="HISTORY_RATES" EntityType="Self.HISTORY_RATES" />
+          <EntitySet Name="INCOMEs" EntityType="Self.INCOME" />
+          <EntitySet Name="MASTERs" EntityType="Self.MASTER" />
+          <EntitySet Name="MORTGAGEs" EntityType="Self.MORTGAGE" />
+          <EntitySet Name="RATES" EntityType="Self.RATE" />
+          <EntitySet Name="SECURITIZATIONs" EntityType="Self.SECURITIZATION" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="VALUATIONs" EntityType="Self.VALUATION" />
+          <AssociationSet Name="FK_HISTORY_RATES_RATES" Association="Self.FK_HISTORY_RATES_RATES">
+            <End Role="RATES" EntitySet="RATES" />
+            <End Role="HISTORY_RATES" EntitySet="HISTORY_RATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INCOME_MASTER" Association="Self.FK_INCOME_MASTER">
+            <End Role="MASTER" EntitySet="MASTERs" />
+            <End Role="INCOME" EntitySet="INCOMEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MORTGAGE_MASTER" Association="Self.FK_MORTGAGE_MASTER">
+            <End Role="MASTER" EntitySet="MASTERs" />
+            <End Role="MORTGAGE" EntitySet="MORTGAGEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RATES_MASTER" Association="Self.FK_RATES_MASTER">
+            <End Role="MASTER" EntitySet="MASTERs" />
+            <End Role="RATES" EntitySet="RATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SECURITIZATION_MASTER" Association="Self.FK_SECURITIZATION_MASTER">
+            <End Role="MASTER" EntitySet="MASTERs" />
+            <End Role="SECURITIZATION" EntitySet="SECURITIZATIONs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VALUATION_MASTER" Association="Self.FK_VALUATION_MASTER">
+            <End Role="MASTER" EntitySet="MASTERs" />
+            <End Role="VALUATION" EntitySet="VALUATIONs" />
+          </AssociationSet>
+          <FunctionImport Name="Get_CPB_Vs_OPB" ReturnType="Collection(Test_ScenarioModel.Get_CPB_Vs_OPB_Result)" />
+        </EntityContainer>
+        <ComplexType Name="Get_CPB_Vs_OPB_Result">
+          <Property Type="Double" Name="OPB" Nullable="true" />
+          <Property Type="Double" Name="CPB" Nullable="true" />
+          <Property Type="Double" Name="WAV" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Test_ScenarioModelStoreContainer" CdmEntityContainer="Test_ScenarioEntities">
+          <EntitySetMapping Name="HISTORies">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.HISTORY">
+              <MappingFragment StoreEntitySet="HISTORY">
+                <ScalarProperty Name="M_PoolID" ColumnName="M_PoolID" />
+                <ScalarProperty Name="M_LoanID" ColumnName="M_LoanID" />
+                <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+                <ScalarProperty Name="CurrentPrincipalBalance" ColumnName="CurrentPrincipalBalance" />
+                <ScalarProperty Name="CurrentLTV" ColumnName="CurrentLTV" />
+                <ScalarProperty Name="LoanAge" ColumnName="LoanAge" />
+                <ScalarProperty Name="CurrentPropertyVal" ColumnName="CurrentPropertyVal" />
+                <ScalarProperty Name="Savings" ColumnName="Savings" />
+                <ScalarProperty Name="CurrentIndexedLTV" ColumnName="CurrentIndexedLTV" />
+                <ScalarProperty Name="DelinquencyStatus" ColumnName="DelinquencyStatus" />
+                <ScalarProperty Name="BorrowerExposure" ColumnName="BorrowerExposure" />
+                <ScalarProperty Name="NoBorrowers" ColumnName="NoBorrowers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORY_RATES">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.HISTORY_RATES">
+              <MappingFragment StoreEntitySet="HISTORY_RATES">
+                <ScalarProperty Name="M_PoolID" ColumnName="M_PoolID" />
+                <ScalarProperty Name="M_LoanID" ColumnName="M_LoanID" />
+                <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+                <ScalarProperty Name="CurrentRateType" ColumnName="CurrentRateType" />
+                <ScalarProperty Name="CurrentInterestRate" ColumnName="CurrentInterestRate" />
+                <ScalarProperty Name="CurrentDTI" ColumnName="CurrentDTI" />
+                <ScalarProperty Name="CurrentLTFV" ColumnName="CurrentLTFV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INCOMEs">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.INCOME">
+              <MappingFragment StoreEntitySet="INCOME">
+                <ScalarProperty Name="M_PoolID" ColumnName="M_PoolID" />
+                <ScalarProperty Name="M_LoanID" ColumnName="M_LoanID" />
+                <ScalarProperty Name="DTI" ColumnName="DTI" />
+                <ScalarProperty Name="LTI" ColumnName="LTI" />
+                <ScalarProperty Name="SelfCertification" ColumnName="SelfCertification" />
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
+                <ScalarProperty Name="TotalIncome" ColumnName="TotalIncome" />
+                <ScalarProperty Name="BorrowerBirthDate" ColumnName="BorrowerBirthDate" />
+                <ScalarProperty Name="IndexedDTI" ColumnName="IndexedDTI" />
+                <ScalarProperty Name="IndexedLTI" ColumnName="IndexedLTI" />
+                <ScalarProperty Name="IndexedTotalIncome" ColumnName="IndexedTotalIncome" />
+                <ScalarProperty Name="MaxBorrowerIncome" ColumnName="MaxBorrowerIncome" />
+                <ScalarProperty Name="BorrowerTotalIncome" ColumnName="BorrowerTotalIncome" />
+                <ScalarProperty Name="LivingExpenses" ColumnName="LivingExpenses" />
+                <ScalarProperty Name="CurrentInterestShock" ColumnName="CurrentInterestShock" />
+                <ScalarProperty Name="MonthlyNetIncome" ColumnName="MonthlyNetIncome" />
+                <ScalarProperty Name="MonthlyMortgageInterest" ColumnName="MonthlyMortgageInterest" />
+                <ScalarProperty Name="MonthlyMortgagePrincipal" ColumnName="MonthlyMortgagePrincipal" />
+                <ScalarProperty Name="MonthlyIncomeBuffer" ColumnName="MonthlyIncomeBuffer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MASTERs">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.MASTER">
+              <MappingFragment StoreEntitySet="MASTER">
+                <ScalarProperty Name="M_PoolID" ColumnName="M_PoolID" />
+                <ScalarProperty Name="M_LoanID" ColumnName="M_LoanID" />
+                <ScalarProperty Name="M_BorrowerID" ColumnName="M_BorrowerID" />
+                <ScalarProperty Name="ClassType" ColumnName="ClassType" />
+                <ScalarProperty Name="OriginalPrincipalBalance" ColumnName="OriginalPrincipalBalance" />
+                <ScalarProperty Name="LoanOriginationDate" ColumnName="LoanOriginationDate" />
+                <ScalarProperty Name="MaturityDate" ColumnName="MaturityDate" />
+                <ScalarProperty Name="TermToMaturity" ColumnName="TermToMaturity" />
+                <ScalarProperty Name="Guarantee" ColumnName="Guarantee" />
+                <ScalarProperty Name="LoanTypeIndicator" ColumnName="LoanTypeIndicator" />
+                <ScalarProperty Name="Sector" ColumnName="Sector" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MORTGAGEs">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.MORTGAGE">
+              <MappingFragment StoreEntitySet="MORTGAGE">
+                <ScalarProperty Name="M_PoolID" ColumnName="M_PoolID" />
+                <ScalarProperty Name="M_LoanID" ColumnName="M_LoanID" />
+                <ScalarProperty Name="BTLStatus" ColumnName="BTLStatus" />
+                <ScalarProperty Name="RepaymentType" ColumnName="RepaymentType" />
+                <ScalarProperty Name="SecondLien" ColumnName="SecondLien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RATES">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.RATE">
+              <MappingFragment StoreEntitySet="RATES">
+                <ScalarProperty Name="M_PoolID" ColumnName="M_PoolID" />
+                <ScalarProperty Name="M_LoanID" ColumnName="M_LoanID" />
+                <ScalarProperty Name="ReversionaryDate" ColumnName="ReversionaryDate" />
+                <ScalarProperty Name="InterestStartDate" ColumnName="InterestStartDate" />
+                <ScalarProperty Name="RemainingFixedRateTerm" ColumnName="RemainingFixedRateTerm" />
+                <ScalarProperty Name="PrincipalStartDate" ColumnName="PrincipalStartDate" />
+                <ScalarProperty Name="OriginalFixedRateTerm" ColumnName="OriginalFixedRateTerm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SECURITIZATIONs">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.SECURITIZATION">
+              <MappingFragment StoreEntitySet="SECURITIZATION">
+                <ScalarProperty Name="M_PoolID" ColumnName="M_PoolID" />
+                <ScalarProperty Name="M_LoanID" ColumnName="M_LoanID" />
+                <ScalarProperty Name="LifetimeBasePD" ColumnName="LifetimeBasePD" />
+                <ScalarProperty Name="LifetimeBasePDOverride" ColumnName="LifetimeBasePDOverride" />
+                <ScalarProperty Name="Multiple_NEW" ColumnName="Multiple_NEW" />
+                <ScalarProperty Name="LifetimeBasePPOverride" ColumnName="LifetimeBasePPOverride" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VALUATIONs">
+            <EntityTypeMapping TypeName="Test_ScenarioModel.VALUATION">
+              <MappingFragment StoreEntitySet="VALUATION">
+                <ScalarProperty Name="M_PoolID" ColumnName="M_PoolID" />
+                <ScalarProperty Name="M_LoanID" ColumnName="M_LoanID" />
+                <ScalarProperty Name="OriginalPropertyValue" ColumnName="OriginalPropertyValue" />
+                <ScalarProperty Name="PropertyValuationDate" ColumnName="PropertyValuationDate" />
+                <ScalarProperty Name="OriginalLTV" ColumnName="OriginalLTV" />
+                <ScalarProperty Name="OriginalLTFV" ColumnName="OriginalLTFV" />
+                <ScalarProperty Name="OriginalForeclosureValue" ColumnName="OriginalForeclosureValue" />
+                <ScalarProperty Name="IndexedLTFV" ColumnName="IndexedLTFV" />
+                <ScalarProperty Name="CurrentForeclosureValue" ColumnName="CurrentForeclosureValue" />
+                <ScalarProperty Name="CurrentPropertyValue" ColumnName="CurrentPropertyValue" />
+                <ScalarProperty Name="CurrentNetPropertyValue" ColumnName="CurrentNetPropertyValue" />
+                <ScalarProperty Name="ForeclosureResidualDebtEstimate" ColumnName="ForeclosureResidualDebtEstimate" />
+                <ScalarProperty Name="LoanLossEstimate" ColumnName="LoanLossEstimate" />
+                <ScalarProperty Name="LoanPrice" ColumnName="LoanPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Get_CPB_Vs_OPB" FunctionName="Test_ScenarioModel.Store.Get_CPB_Vs_OPB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Test_ScenarioModel.Get_CPB_Vs_OPB_Result">
+                <ScalarProperty Name="OPB" ColumnName="OPB" />
+                <ScalarProperty Name="CPB" ColumnName="CPB" />
+                <ScalarProperty Name="WAV" ColumnName="WAV" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

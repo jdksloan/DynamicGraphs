@@ -6,18 +6,19 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Web.Http;
+using Newtonsoft.Json;
 
 namespace DynamicGraphsUI.Controllers
 {
     public class GraphController : ApiController
     {
+
         // GET: api/Graph
-        public string Get()
+        public HttpResponseMessage Get()
         {
-            using (StreamReader r = new StreamReader(@"C:\Jethro\test.json"))
-            {
-                return  r.ReadToEnd();
-            }
+            
+            string result = System.IO.File.ReadAllText(@"C:\Jethro\test.json");
+            return Request.CreateResponse(HttpStatusCode.OK, JsonConvert.DeserializeObject(result));
         }
 
         // GET: api/Graph/5
